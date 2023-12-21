@@ -1,0 +1,4 @@
+# SingletonMonoBehaviour
+SingletonMonoBehaviourクラスを継承させることでオブジェクトをシングルトンで管理できるようになる
+Awakeをoverrideする場合はbaseを呼び出すこと
+ジェネリック引数にシングルトンにしたいクラスを指定
