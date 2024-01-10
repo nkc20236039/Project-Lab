@@ -134,3 +134,5 @@ crashlytics-build.properties
 # .gitignoreは複数のフォルダに入れることが可能
 ## 別のフォルダに新しく作るとそのフォルダがrootフォルダになる
 ## →除外したいファイルに「/」とだけ記入した.gitignoreを作ることもできる
+Assets/UnityChan
+Assets/UnityChan.meta
