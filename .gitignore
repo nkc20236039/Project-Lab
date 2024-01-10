@@ -80,7 +80,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ff]onts.meta
 # その他インストールしたアセットがある場合は除外すべき
 
-
 # ~~~~~~~gitignoreの書き方~~~~~~~
 # 指定方法
 # 「#」コメント
