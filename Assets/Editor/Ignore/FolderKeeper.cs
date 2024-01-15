@@ -64,7 +64,6 @@ public class FolderKeeper : AssetPostprocessor
             {
                 //キーパーを作成
                 File.Create(path + "/" + keeperName).Close();
-                Debug.Log("Keeper Created : " + path);
             }
             return;
         }
@@ -76,7 +75,6 @@ public class FolderKeeper : AssetPostprocessor
             {
                 //キーパーを削除
                 File.Delete(path + "/" + keeperName);
-                Debug.Log("Keeper Deleted : " + path);
             }
         }
 
