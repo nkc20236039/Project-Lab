@@ -1,29 +1,24 @@
-using System;
-using System.Numerics;
+using UnityEngine;
 
-public class MoveState
+
+
+public sealed class MainEntity: MonoBehaviour
 {
-    public float Speed { get; set; }
+    StateMachine stateMachine;
 
-    public IMovementVector MovementVector { get; set; }
-
-    public void UpdateState()
+    private void Awake()
     {
-        // 移動ベクトルを取得
-        var movement = MovementVector.GetMovementVector();
-
-        // 速度を掛ける
-        var scaledVector = movement * Speed;
-
-        // 移動を適用 (移動処理は外部で行う)
-        OnMoved(scaledVector);
+        
     }
 
-    public event Action<Vector2> OnMoved;
-}
+    private void Start()
+    {
+        // StateMachineを取得する
+        stateMachine = ServiceLocator<StateMachine>.Get();
+    }
 
-// IMovementVector インターフェイス
-public interface IMovementVector
-{
-    Vector2 GetMovementVector();
+    private void Update()
+    {
+        
+    }
 }
