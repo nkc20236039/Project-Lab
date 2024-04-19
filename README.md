@@ -1,72 +1,42 @@
+# .gitignoreの記述方法
+[.gitignore](https://github.com/nkc20236039/Project-Lab/blob/main/.gitignore)に詳細を記載
+
 # 複数のプロジェクトで使える機能
 プロジェクトの最初に入れておけば簡単に使える機能をまとめてある
 
 ## SingletonMonoBehaviour
-<details>
+> 備忘録
+
 SingletonMonoBehaviourクラスを継承させることでオブジェクトをシングルトンで管理できるようになる
 Awakeをoverrideする場合はbaseを呼び出すこと
 ジェネリック引数にシングルトンにしたいクラスを指定
-</details>
 
-## StateMachine
-<details>
-汎用型StateMachineクラス
-
+## StateMachineLocator
+ステートマシーンのインスタンス登録のためのサービスロケーター
+使いたい場所でStateMachineLocatorのインスタンスを生成する必要があるがそれぞれのステートマシーンの中でのみ使用するように限定できる
 ```c#
-public StateMachine(bool isThrowException = false);
-```
-引数をtrueにすると無効状態時の呼び出しでエラーを投げるようになる
+// インスタンスの生成
+enum PlayerState{
+    Idle, Move,
+}
 
-- ## CurrentState
+StateMachineLocator<PlayerState> stateMachine = new();
 ```
-public IState CurrentState;
-```
-現在の状態を取得する
-
-- ## IsEnable
-```
-public bool IsEnable;
-```
-StateMachineが有効常態か取得する
-
-- ## Register
+インスタンスの登録はRegisterメソッドを使用
 ```c#
-public void Register(Enum key, IState value, bool isSingleton = false);
+public void Register(TState state, IState instance, bool overwrite = false)
 ```
-状態の登録を行うクラス。
-<details>
-<summary>引数</summary>
-1. 状態と関連付ける列挙型のキー(enum)
-2. IStateを実装した状態のインスタンス(IState)
-3. 状態を上書きするか(bool)  デフォルトでfalse
-</details>
+引数
+1. 登録したい状態のEnum
+2. 登録したい状態のインスタンス
+3. 既に状態が存在した場合、上書きするか(デフォルトはfalse)
 
-- ## Enable
-```c#
-public void Enable(Enum initalState);
+インスタンスの取得はGetメソッドを使用
+```C#
+public IState Get(TState state)
 ```
-StateMachineを有効にする
-<details>
-<summary>引数</summary>
-1. 有効にするときの初期状態(enum)
-</details>
+引数
+1. 取得したい状態のEnum
 
-- ## Disable
-```c#
-public void Disable();
-```
-StateMachineを無効にする
-
-- ## Disable
-```c#
-void IDisposable.Dispose();
-```
-全ての状態、インスタンスを無効化します
-
-- ## GetStateString
-```c#
-public string GetStateString()
-```
-現在の状態をstring型で返す(デバッグ用)
-
-</details>
+戻り値
+- 引数で指定した状態のインスタンス

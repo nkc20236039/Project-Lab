@@ -71,8 +71,14 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# ~~~~~ここから下はオリジナル~~~~~
-
+# ~~~~~ここからはオリジナル~~~~~
+# ignoreという名前のフォルダを全て除外
+*/[Ii]gnore
+*/[Ii]gnore.meta
+# Assetsフォルダ直下にあるfontsフォルダを除外
+/[Aa]ssets/[Ff]onts
+/[Aa]ssets/[Ff]onts.meta
+# その他インストールしたアセットがある場合は除外すべき
 
 # ~~~~~~~gitignoreの書き方~~~~~~~
 # 指定方法
@@ -122,4 +128,9 @@ crashlytics-build.properties
 # 
 # 正規表現は使えません
 ## []は正規表現と同じように使うことができます(これが使えるから正規表現使えると思ってしまう)
+#
 # フォルダを除外対象にするとその配下のファイルも除外されます
+#
+# .gitignoreは複数のフォルダに入れることが可能
+## 別のフォルダに新しく作るとそのフォルダがrootフォルダになる
+## →除外したいファイルに「/」とだけ記入した.gitignoreを作ることもできる
