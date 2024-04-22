@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 
-public class StateMachine<TState>
-    where TState : Enum
+public class StateMachine<TStateEnum>
+    where TStateEnum : Enum
 {
     private bool isEnable;
     private IState currentState;
-    private Dictionary<TState, IState> stateDictionary;
+    private Dictionary<TStateEnum, IState> stateDictionary;
     private VoidState voidState;
 
     public StateMachine(bool isThrowException = false)
@@ -46,7 +46,7 @@ public class StateMachine<TState>
     /// <param name="key">状態を登録する列挙子</param>
     /// <param name="value">状態のインスタンス</param>
     /// <param name="isOverride">インスタンスをシングルトンにします</param>
-    public void Register(TState key, IState value, bool isOverride = false)
+    public void Register(TStateEnum key, IState value, bool isOverride = false)
     {
         if (!(stateDictionary.TryAdd(key, value) && isOverride))
         {
@@ -59,7 +59,7 @@ public class StateMachine<TState>
     /// </summary>
     /// <param name="key">解除する状態のキー</param>
     /// <param name="isForce">現在状態を実行していても強制的に削除する</param>
-    public void Unregister(TState key, bool isForce = true)
+    public void Unregister(TStateEnum key, bool isForce = true)
     {
         if (!stateDictionary.ContainsKey(key))
         {
@@ -78,7 +78,7 @@ public class StateMachine<TState>
     /// StateMachineを有効化する
     /// </summary>
     /// <param name="initalState">初期の状態</param>
-    public void Enable(TState initalState)
+    public void Enable(TStateEnum initalState)
     {
         ChangeState(initalState);
 
@@ -111,7 +111,7 @@ public class StateMachine<TState>
     /// 状態を更新
     /// </summary>
     /// <param name="state">次に更新する状態</param>
-    private void ChangeState(TState state)
+    private void ChangeState(TStateEnum state)
     {
         if (currentState != null)
         {
@@ -133,7 +133,7 @@ public class StateMachine<TState>
             return;
         }
 
-        TState receivedNextState = currentState.NextStateComparison<TState>();
+        TStateEnum receivedNextState = currentState.NextStateComparison<TStateEnum>();
 
         if (stateDictionary[receivedNextState] != currentState)
         {
