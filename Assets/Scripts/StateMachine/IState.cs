@@ -7,5 +7,5 @@ public interface IState
     public void OnFixedUpdate();
     public void OnExit();
 
-    public T NextStateComparison<T>() where T : Enum;
+    public Enum NextStateComparison();
 }

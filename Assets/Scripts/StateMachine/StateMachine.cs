@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-public class StateMachine<TStateEnum>
-    where TStateEnum : Enum
+public class StateMachine
 {
     private bool isEnable;
     private IState currentState;
-    private Dictionary<TStateEnum, IState> stateDictionary;
+    private Dictionary<Enum, IState> stateDictionary;
     private VoidState voidState;
 
     public StateMachine(bool isThrowException = false)
@@ -46,7 +45,7 @@ public class StateMachine<TStateEnum>
     /// <param name="key">状態を登録する列挙子</param>
     /// <param name="value">状態のインスタンス</param>
     /// <param name="isOverride">インスタンスをシングルトンにします</param>
-    public void Register(TStateEnum key, IState value, bool isOverride = false)
+    public void Register(Enum key, IState value, bool isOverride = false)
     {
         if (!(stateDictionary.TryAdd(key, value) && isOverride))
         {
@@ -59,7 +58,7 @@ public class StateMachine<TStateEnum>
     /// </summary>
     /// <param name="key">解除する状態のキー</param>
     /// <param name="isForce">現在状態を実行していても強制的に削除する</param>
-    public void Unregister(TStateEnum key, bool isForce = true)
+    public void Unregister(Enum key, bool isForce = true)
     {
         if (!stateDictionary.ContainsKey(key))
         {
@@ -78,7 +77,7 @@ public class StateMachine<TStateEnum>
     /// StateMachineを有効化する
     /// </summary>
     /// <param name="initalState">初期の状態</param>
-    public void Enable(TStateEnum initalState)
+    public void Enable(Enum initalState)
     {
         ChangeState(initalState);
 
@@ -111,7 +110,7 @@ public class StateMachine<TStateEnum>
     /// 状態を更新
     /// </summary>
     /// <param name="state">次に更新する状態</param>
-    private void ChangeState(TStateEnum state)
+    private void ChangeState(Enum state)
     {
         if (currentState != null)
         {
@@ -133,7 +132,7 @@ public class StateMachine<TStateEnum>
             return;
         }
 
-        TStateEnum receivedNextState = currentState.NextStateComparison<TStateEnum>();
+        Enum receivedNextState = currentState.NextStateComparison();
 
         if (stateDictionary[receivedNextState] != currentState)
         {
@@ -152,7 +151,7 @@ public class StateMachine<TStateEnum>
             this.isThrowException = isThrowException;
         }
 
-        T IState.NextStateComparison<T>()
+        Enum IState.NextStateComparison()
         {
             throw ex;
         }
