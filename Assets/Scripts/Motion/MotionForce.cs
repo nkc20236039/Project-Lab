@@ -12,28 +12,8 @@ namespace Player.Motion
             return this;
         }
 
-        IMotionForceHandle IMotionForceHandle.AdvancedForSpeed(float forward, float back, float left, float right)
-        {
-            result = AdvancedForSpeed(forward, back, left, right);
-
-            return this;
-        }
-
-        IMotionForceHandle IMotionForceHandle.AdvancedForSpeed(float forward, float back, float side)
-        {
-            result = AdvancedForSpeed(forward, back, side, side);
-            
-            return this;
-        }
-
-        IMotionForceHandle IMotionForceHandle.CustomSpeed(Vector3 speed)
-        {
-            result = Vector3.Scale(result, speed);
-
-            return this;
-        }
-
-        private Vector3 AdvancedForSpeed(float forward, float back, float left, float right)
+        // IMotionForceHandle IMotionForceHandle.AdvancedForSpeed(float forward, float back, float left, float right)
+        public IMotionForceHandle AdvancedForSpeed(float forward, float back, float left, float right)
         {
             // ˆÚ“®•ûŒü‚É‰ž‚¶‚½‘¬“x‚ðŽæ“¾
             float horizontalSpeed = (0 < keyInput.x) ? left : right;
@@ -44,7 +24,32 @@ namespace Player.Motion
             Vector3 sideMove = result - forwardMove;
 
             // ‘¬“x‚ðÄÝ’è‚µ‚Ä•Ô‚·
-            return forwardMove.normalized * verticalSpeed + sideMove.normalized * horizontalSpeed;
+            result
+                = forwardMove.normalized * verticalSpeed
+                + sideMove.normalized * horizontalSpeed;
+
+            return this;
+        }
+
+        public IMotionForceHandle AdvancedForSpeed(float forward, float back, float side)
+        {
+            AdvancedForSpeed(forward, back, side, side);
+
+            return this;
+        }
+
+        IMotionForceHandle IMotionForceHandle.CustomSpeed(Vector3 speed)
+        {
+            result = Vector3.Scale(result, speed);
+
+            return this;
+        }
+
+        public IMotionForceHandle AdditionSpeed(Vector3 speed)
+        {
+            result += speed;
+
+            return this;
         }
     }
 }

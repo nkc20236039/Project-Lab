@@ -26,7 +26,7 @@ public class DemoPlayer : MonoBehaviour
         transform.position
             = motionCreator
             .Create(inputDirection)
-            .CameraView(targetCamera)
+            .ObjectView(targetCamera)
             .PlaneMotion()
             .AdvancedForSpeed(speed1, speed2, speed3)
             .ForceVector;

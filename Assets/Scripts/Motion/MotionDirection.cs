@@ -17,7 +17,5 @@ namespace Player.Motion
 
             return this;
         }
-
-
     }
 }

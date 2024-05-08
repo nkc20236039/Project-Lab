@@ -4,11 +4,11 @@ namespace Player.Motion
 {
     public partial struct MotionBuilder : IMotionStandardHandle, IMotionDirectionHandle
     {
-        public IMotionDirectionHandle CameraView(GameObject camera)
+        public IMotionDirectionHandle ObjectView(GameObject targetObject)
         {
             result
-                = camera.transform.forward * keyInput.z
-                + camera.transform.right * keyInput.x;
+                = targetObject.transform.forward * keyInput.z
+                + targetObject.transform.right * keyInput.x;
 
             return this;
         }
