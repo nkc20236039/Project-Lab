@@ -1,4 +1,4 @@
-using Player.Motion;
+using PlayerMotion;
 using UnityEngine;
 
 public class DemoPlayer : MonoBehaviour
