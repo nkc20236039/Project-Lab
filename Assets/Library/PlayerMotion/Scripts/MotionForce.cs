@@ -18,15 +18,13 @@ namespace PlayerMotion
             // 移動方向に応じた速度を取得
             float horizontalSpeed = (0 < keyInput.x) ? left : right;
             float verticalSpeed = (0 < keyInput.z) ? forward : back;
-            Debug.Log($"{keyInput}\n{result}");
+            
             // これまでの結果から前後と横移動を取得
             float forwardMove = Vector3.Dot(keyInput, result);
             Vector3 sideMove = result - forwardMove * result;
 
-            if (forwardMove < 0f)
-            {
-                forwardMove = -forwardMove;
-            }
+            // 前方方向を絶対値化
+            forwardMove = Mathf.Abs(forwardMove);
 
             // 速度を再設定して返す
             result

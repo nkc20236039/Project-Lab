@@ -30,6 +30,14 @@ namespace PlayerMotion
         }
     }
 
+    public enum MotionAxis
+    {
+        XYZ,
+        X, Y, Z,
+        XY, XZ,
+        YZ,
+    }
+
     public interface IMotionStandardHandle
     {
         /// <summary>
@@ -56,6 +64,8 @@ namespace PlayerMotion
         /// </summary>
         /// <param name="normal">è]ÇÌÇπÇÈñ@ê¸</param>
         public IMotionDirectionHandle ProjectOnPlane(Vector3 normal);
+
+        public IMotionDirectionHandle Inversion(MotionAxis axis);
     }
 
     public interface IMotionForceHandle : IMotionGettable
