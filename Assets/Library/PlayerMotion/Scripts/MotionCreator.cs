@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Player.Motion
+namespace PlayerMotion
 {
-    public class MotionCreator
+    public struct MotionCreator
     {
         public IMotionStandardHandle Create(float input)
         {
