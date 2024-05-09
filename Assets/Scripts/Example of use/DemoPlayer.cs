@@ -1,34 +1,44 @@
 using PlayerMotion;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DemoPlayer : MonoBehaviour
 {
     private MotionCreator motionCreator;
+    private PlayerInputActions inputAction;
+    private Vector2 input;
 
     [SerializeField]
     private GameObject targetCamera;
     [SerializeField]
-    private float speed1 = 2f;
+    private float forwardSpeed = 2f;
     [SerializeField]
-    private float speed2 = 0.5f;
+    private float backSpeed = 0.5f;
     [SerializeField]
-    private float speed3 = 1f;
+    private float sideSpeed = 1f;
 
     private void Start()
     {
         motionCreator = new();
+        inputAction = new();
+        inputAction.Player.Move.performed += OnMove;
+        inputAction.Player.Move.canceled += OnMove;
+        inputAction.Enable();
+    }
+
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        input = context.ReadValue<Vector2>();
     }
 
     private void Update()
     {
-        Vector2 inputDirection = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
         transform.position
             = motionCreator
-            .Create(inputDirection)
+            .Create(input)
             .ObjectView(targetCamera)
             .PlaneMotion()
-            .AdvancedForSpeed(speed1, speed2, speed3)
+            .AdvancedForSpeed(forwardSpeed, backSpeed, sideSpeed)
             .ForceVector;
     }
 }

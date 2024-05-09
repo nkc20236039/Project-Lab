@@ -18,14 +18,19 @@ namespace PlayerMotion
             // ˆÚ“®•ûŒü‚É‰ž‚¶‚½‘¬“x‚ðŽæ“¾
             float horizontalSpeed = (0 < keyInput.x) ? left : right;
             float verticalSpeed = (0 < keyInput.z) ? forward : back;
-
+            Debug.Log($"{keyInput}\n{result}");
             // ‚±‚ê‚Ü‚Å‚ÌŒ‹‰Ê‚©‚ç‘OŒã‚Æ‰¡ˆÚ“®‚ðŽæ“¾
-            Vector3 forwardMove = Vector3.Project(keyInput, result);
-            Vector3 sideMove = result - forwardMove;
+            float forwardMove = Vector3.Dot(keyInput, result);
+            Vector3 sideMove = result - forwardMove * result;
+
+            if (forwardMove < 0f)
+            {
+                forwardMove = -forwardMove;
+            }
 
             // ‘¬“x‚ðÄÝ’è‚µ‚Ä•Ô‚·
             result
-                = forwardMove.normalized * verticalSpeed
+                = forwardMove * result.normalized * verticalSpeed
                 + sideMove.normalized * horizontalSpeed;
 
             return this;

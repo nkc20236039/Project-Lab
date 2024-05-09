@@ -7,6 +7,12 @@ namespace PlayerMotion
         private Vector3 keyInput;
         private Vector3 result;
 
+        internal MotionBuilder(Vector3 keyInput, Vector3 result)
+        {
+            this.keyInput = keyInput;
+            this.result = result;
+        }
+
         public Vector3 InitalInput
         {
             get => keyInput;

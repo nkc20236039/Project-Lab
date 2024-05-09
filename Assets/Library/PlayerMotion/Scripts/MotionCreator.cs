@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace PlayerMotion
 {
-    public struct MotionCreator
+    public class MotionCreator
     {
         public IMotionStandardHandle Create(float input)
         {
