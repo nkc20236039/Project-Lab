@@ -26,17 +26,19 @@ public class StateMachine
     {
         currentState.OnUpdate();
 
-        VerifyNextState();
-    }
+        if (!isEnable)
+        {
+            // 無効状態なら次の状態検証をしない
+            return;
+        }
 
-    /// <summary>
-    /// 一定時間の更新処理として使用します
-    /// </summary>
-    public void FixedUpdate()
-    {
-        currentState.OnFixedUpdate();
+        Enum receivedNextState = currentState.NextStateComparison();
 
-        VerifyNextState();
+        if (stateDictionary[receivedNextState] != currentState)
+        {
+            // 受け取った状態が現在の状態と違ったら状態を変更する
+            ChangeState(receivedNextState);
+        }
     }
 
     /// <summary>
@@ -126,19 +128,7 @@ public class StateMachine
 
     private void VerifyNextState()
     {
-        if (!isEnable)
-        {
-            // 無効状態なら次の状態検証をしない
-            return;
-        }
-
-        Enum receivedNextState = currentState.NextStateComparison();
-
-        if (stateDictionary[receivedNextState] != currentState)
-        {
-            // 受け取った状態が現在の状態と違ったら状態を変更する
-            ChangeState(receivedNextState);
-        }
+        
     }
 
     private class VoidState : IState
@@ -159,8 +149,6 @@ public class StateMachine
         void IState.OnEnter() { ThrowException(); }
 
         void IState.OnExit() { ThrowException(); }
-
-        void IState.OnFixedUpdate() { ThrowException(); }
 
         void IState.OnUpdate() { ThrowException(); }
 
