@@ -1,9 +1,9 @@
 using System.Drawing;
 using UnityEngine;
 
-namespace PlayerMotion
+namespace PlayerMotion.Accessory
 {
-    public partial struct MotionBuilder : IMotionStandardHandle, IMotionDirectionHandle
+    public partial struct MotionAccessory : IMotionStandardHandle, IMotionDirectionHandle
     {
         IMotionForceHandle IMotionForceHandle.OverallSpeed(float speed)
         {
@@ -16,11 +16,11 @@ namespace PlayerMotion
         public IMotionForceHandle AdvancedForSpeed(float forward, float back, float left, float right)
         {
             // ˆÚ“®•ûŒü‚É‰ž‚¶‚½‘¬“x‚ðŽæ“¾
-            float horizontalSpeed = (0 < keyInput.x) ? left : right;
-            float verticalSpeed = (0 < keyInput.z) ? forward : back;
+            float horizontalSpeed = (0 < moveKey.x) ? left : right;
+            float verticalSpeed = (0 < moveKey.z) ? forward : back;
 
             // ‚±‚ê‚Ü‚Å‚ÌŒ‹‰Ê‚©‚ç‘OŒã‚Æ‰¡ˆÚ“®‚ðŽæ“¾
-            float forwardMove = Vector3.Dot(keyInput, result);
+            float forwardMove = Vector3.Dot(moveKey, result);
             Vector3 sideMove = result - forwardMove * result;
 
             // ‘¬“x‚ðÄÝ’è‚µ‚Ä•Ô‚·
@@ -31,7 +31,7 @@ namespace PlayerMotion
             return this;
         }
 
-        public IMotionForceHandle AdvancedForSpeed(float forward, float back, float side)
+        IMotionForceHandle IMotionForceHandle.AdvancedForSpeed(float forward, float back, float side)
         {
             AdvancedForSpeed(forward, back, side, side);
 
@@ -45,7 +45,7 @@ namespace PlayerMotion
             return this;
         }
 
-        public IMotionForceHandle AdditionSpeed(Vector3 speed)
+        IMotionForceHandle IMotionForceHandle.AdditionSpeed(Vector3 speed)
         {
             result += speed;
 

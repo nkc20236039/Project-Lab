@@ -26,6 +26,11 @@ public class DemoPlayer : MonoBehaviour
         inputAction.Enable();
     }
 
+    private void Move_performed(InputAction.CallbackContext obj)
+    {
+        throw new System.NotImplementedException();
+    }
+
     private void OnMove(InputAction.CallbackContext context)
     {
         input = context.ReadValue<Vector2>();
@@ -33,12 +38,15 @@ public class DemoPlayer : MonoBehaviour
 
     private void Update()
     {
-        transform.position
-            = motionCreator
+        IMotionGettable creator = motionCreator
             .Create(input)
             .ObjectView(targetCamera)
             .PlaneMotion()
-            .AdvancedForSpeed(forwardSpeed, backSpeed, sideSpeed)
-            .ForceVector;
+            .AdvancedForSpeed(forwardSpeed, backSpeed, sideSpeed);
+
+        transform.position = creator.ForceVector;
+        transform.rotation = creator.CharacterRotation(transform.rotation, 0.8f);
     }
+
+
 }

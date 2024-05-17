@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using PlayerMotion.Accessory;
+using PlayerMotion;
 
 namespace PlayerMotion
 {
@@ -7,24 +9,24 @@ namespace PlayerMotion
     {
         public IMotionStandardHandle Create(float input)
         {
-            MotionBuilder motionBuilder = new();
-            motionBuilder.InitalInput = new Vector3(input, 0, 0);
+            MotionAccessory motionBuilder = new();
+            motionBuilder.MoveKey = new Vector3(input, 0, 0);
 
             return motionBuilder;
         }
 
         public IMotionStandardHandle Create(Vector2 input)
         {
-            MotionBuilder motionBuilder = new();
-            motionBuilder.InitalInput = new Vector3(input.x, 0, input.y);
+            MotionAccessory motionBuilder = new();
+            motionBuilder.MoveKey = new Vector3(input.x, 0, input.y);
 
             return motionBuilder;
         }
 
         public IMotionStandardHandle Create(Vector3 input)
         {
-            MotionBuilder motionBuilder = new();
-            motionBuilder.InitalInput = input;
+            MotionAccessory motionBuilder = new();
+            motionBuilder.MoveKey = input;
 
             return motionBuilder;
         }
@@ -32,6 +34,7 @@ namespace PlayerMotion
 
     public enum MotionAxis
     {
+        None, 
         XYZ,
         X, Y, Z,
         XY, XZ,
@@ -128,5 +131,7 @@ namespace PlayerMotion
         /// —Í‚Ì•ûŒü
         /// </summary>
         public Vector3 ForceNormal { get; }
+
+        public Quaternion CharacterRotation(Quaternion currentRotation, float smoothing);
     }
 }
