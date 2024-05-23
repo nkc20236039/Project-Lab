@@ -47,6 +47,4 @@ public class DemoPlayer : MonoBehaviour
         transform.position = creator.ForceVector;
         transform.rotation = creator.CharacterRotation(transform.rotation, 0.8f);
     }
-
-
 }

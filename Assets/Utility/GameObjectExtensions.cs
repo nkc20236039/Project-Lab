@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public static class MonoBehaviourExtension
+public static class GameObjectExtensions
 {
     /// <summary>
     /// ƒŒƒCƒ„[‚ªˆê’v‚µ‚Ä‚¢‚é‚©’²‚×‚Ü‚·
