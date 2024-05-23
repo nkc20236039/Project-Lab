@@ -16,8 +16,6 @@ public class DemoPlayer : MonoBehaviour
     private float backSpeed = 0.5f;
     [SerializeField]
     private float sideSpeed = 1f;
-    [SerializeField]
-    private LayerMask hoge;
 
     private void Start()
     {
@@ -40,7 +38,6 @@ public class DemoPlayer : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"{(int)hoge}\n{gameObject.IsLayersMatch(hoge)}");
         IMotionGettable creator = motionCreator
             .Create(input)
             .ObjectView(targetCamera)
