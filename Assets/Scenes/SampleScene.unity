@@ -491,7 +491,7 @@ GameObject:
   - component: {fileID: 1264901718}
   - component: {fileID: 1264901717}
   - component: {fileID: 1264901716}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,6 +514,9 @@ MonoBehaviour:
   forwardSpeed: 2
   backSpeed: 0.5
   sideSpeed: 1
+  hoge:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!65 &1264901717
 BoxCollider:
   m_ObjectHideFlags: 0
