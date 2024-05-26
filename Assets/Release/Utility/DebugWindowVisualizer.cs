@@ -15,14 +15,22 @@ public abstract class DebugWindowVisualizer : MonoBehaviour
     [SerializeField]
     private Rect windowRect = new(0f, 0f, 200, 300);
     [SerializeField]
+    private int titleSize;
+    [SerializeField]
     private bool isForce;
+
+    private bool isHoge = true;
 
     protected virtual void OnGUI()
     {
+        // タイトルの大きさを変更
+        GUIStyle guiStyle = GUI.skin.window;
+        guiStyle.fontSize = titleSize;
+
         // 表示する命令か強制表示をする場合
         if (Selection.activeGameObject == gameObject || isForce)
         {
-            GUILayout.Window(originalWindowID, windowRect, DebugLabels, windowName);
+            windowRect = GUILayout.Window(originalWindowID, windowRect, DebugLabels, windowName, guiStyle);
         }
     }
 

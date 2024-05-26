@@ -7,5 +7,7 @@ public class DebugDemo : DebugWindowVisualizer
     protected override void DebugLabels(int id)
     {
         
+
+        GUI.DragWindow();
     }
 }

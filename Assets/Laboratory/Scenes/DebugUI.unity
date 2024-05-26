@@ -330,6 +330,7 @@ MonoBehaviour:
     y: 0
     width: 200
     height: 300
+  titleSize: 10
   isForce: 1
 --- !u!4 &1032056075
 Transform:
