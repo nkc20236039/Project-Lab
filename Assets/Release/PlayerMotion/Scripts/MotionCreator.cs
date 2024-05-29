@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using PlayerMotion.Accessory;
-using PlayerMotion;
 
 namespace PlayerMotion
 {
