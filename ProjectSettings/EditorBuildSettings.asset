@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Laboratory/Scenes/DebugUI.unity
     guid: 9fff80acf9834dd4baf62f5e5e90a247
+  - enabled: 1
+    path: Assets/Laboratory/Scenes/CinemachineExtension.unity
+    guid: 982f850be2ce7904c805b11000e2d04a
   m_configObjects: {}
