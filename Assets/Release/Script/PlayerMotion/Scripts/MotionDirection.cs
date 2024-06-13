@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PlayerMotion.Accessory
+namespace CharacterMotion.Accessory
 {
     public partial struct MotionAccessory : IMotionStandardHandle, IMotionDirectionHandle
     {

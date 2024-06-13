@@ -126,11 +126,6 @@ public class StateMachine
         currentState.OnEnter();
     }
 
-    private void VerifyNextState()
-    {
-        
-    }
-
     private class VoidState : IState
     {
         private bool isThrowException;

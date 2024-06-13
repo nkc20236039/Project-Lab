@@ -6,7 +6,7 @@ public class DebugDemo : DebugWindowVisualizer
 {
     protected override void DebugLabels(int id)
     {
-        
+        GUILayout.Label("test");
 
         GUI.DragWindow();
     }

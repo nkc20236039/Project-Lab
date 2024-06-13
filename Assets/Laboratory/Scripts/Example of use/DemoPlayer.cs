@@ -1,4 +1,4 @@
-using PlayerMotion;
+using CharacterMotion;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,13 +38,17 @@ public class DemoPlayer : MonoBehaviour
 
     private void Update()
     {
-        IMotionGettable creator = motionCreator
+        Quaternion currentRotation = transform.rotation;
+
+        IMotionResult creator = motionCreator
             .Create(input)
             .ObjectView(targetCamera)
             .PlaneMotion()
             .AdvancedForSpeed(forwardSpeed, backSpeed, sideSpeed);
 
-        transform.position = creator.ForceVector;
-        transform.rotation = creator.CharacterRotation(transform.rotation, 0.8f);
+        transform.position = creator.GetForce();
+        // creator.CharacterSmoothlyRotation(ref currentRotation, 0.8f, MotionAxis.XZ);
+
+        transform.rotation = creator.CharacterRotation(MotionAxis.XZ);
     }
 }

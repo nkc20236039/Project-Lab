@@ -1,7 +1,7 @@
 using System.Drawing;
 using UnityEngine;
 
-namespace PlayerMotion.Accessory
+namespace CharacterMotion.Accessory
 {
     public partial struct MotionAccessory : IMotionStandardHandle, IMotionDirectionHandle
     {
@@ -16,11 +16,11 @@ namespace PlayerMotion.Accessory
         public IMotionForceHandle AdvancedForSpeed(float forward, float back, float left, float right)
         {
             // ˆÚ“®•ûŒü‚É‰ž‚¶‚½‘¬“x‚ðŽæ“¾
-            float horizontalSpeed = (0 < moveKey.x) ? left : right;
-            float verticalSpeed = (0 < moveKey.z) ? forward : back;
+            float horizontalSpeed = (0 < motionCreator.Input.x) ? left : right;
+            float verticalSpeed = (0 < motionCreator.Input.z) ? forward : back;
 
             // ‚±‚ê‚Ü‚Å‚ÌŒ‹‰Ê‚©‚ç‘OŒã‚Æ‰¡ˆÚ“®‚ðŽæ“¾
-            float forwardMove = Vector3.Dot(moveKey, result);
+            float forwardMove = Vector3.Dot(motionCreator.Input, result);
             Vector3 sideMove = result - forwardMove * result;
 
             // ‘¬“x‚ðÄÝ’è‚µ‚Ä•Ô‚·

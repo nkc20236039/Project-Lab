@@ -1,39 +1,69 @@
 using System;
 using UnityEngine;
-using PlayerMotion.Accessory;
+using CharacterMotion.Accessory;
 
-namespace PlayerMotion
+namespace CharacterMotion
 {
     public class MotionCreator
     {
+        private Rigidbody rigidbody;
+        private Rigidbody2D rigidbody2D;
+        private float time;
+        private Vector3 input;
+
+        internal Rigidbody Rigidbody => rigidbody;
+        internal Rigidbody2D Rigidbody2D => rigidbody2D;
+        internal float Time
+        {
+            get => time;
+            set => time = value;
+        }
+        internal Vector3 Input => input;
+
+        public MotionCreator(Rigidbody rigidbody)
+        {
+            this.rigidbody = rigidbody;
+        }
+
+        public MotionCreator(Rigidbody2D rigidbody2D)
+        {
+            this.rigidbody2D = rigidbody2D;
+        }
+
+        // デフォルトコンストラクタ
+        public MotionCreator() { }
+
         public IMotionStandardHandle Create(float input)
         {
-            MotionAccessory motionBuilder = new();
-            motionBuilder.MoveKey = new Vector3(input, 0, 0);
+            MotionAccessory motionAccessory = new();
+            motionAccessory.MotionCreator = this;
+            this.input = new Vector3(input, 0, 0);
 
-            return motionBuilder;
+            return motionAccessory;
         }
 
         public IMotionStandardHandle Create(Vector2 input)
         {
-            MotionAccessory motionBuilder = new();
-            motionBuilder.MoveKey = new Vector3(input.x, 0, input.y);
+            MotionAccessory motionAccessory = new();
+            motionAccessory.MotionCreator = this;
+            this.input = new Vector3(input.x, 0, input.y);
 
-            return motionBuilder;
+            return motionAccessory;
         }
 
         public IMotionStandardHandle Create(Vector3 input)
         {
-            MotionAccessory motionBuilder = new();
-            motionBuilder.MoveKey = input;
+            MotionAccessory motionAccessory = new();
+            motionAccessory.MotionCreator = this;
+            this.input = input;
 
-            return motionBuilder;
+            return motionAccessory;
         }
     }
 
     public enum MotionAxis
     {
-        None, 
+        None,
         XYZ,
         X, Y, Z,
         XY, XZ, YZ
@@ -69,7 +99,7 @@ namespace PlayerMotion
         public IMotionDirectionHandle Inversion(MotionAxis axis);
     }
 
-    public interface IMotionForceHandle : IMotionGettable
+    public interface IMotionForceHandle : IMotionResult
     {
         /// <summary>
         /// 全ての方向に均等に速度を乗算します
@@ -108,28 +138,33 @@ namespace PlayerMotion
         public IMotionForceHandle AdditionSpeed(Vector3 speed);
     }
 
-    public interface IMotionGettable
+    public interface IMotionResult
     {
         /// <summary>
-        /// 力の計算結果
+        /// 計算結果を取得します
         /// </summary>
-        public Vector3 ForceVector { get; }
+        public Vector3 GetForce();
 
         /// <summary>
-        /// Time.DeltaTimeを乗算した力の計算結果
+        /// 計算結果をRigidbody.AddForceとして実行します
         /// </summary>
-        public Vector3 DeltaTimeForce { get; }
+        public void AddForce(ForceMode forceMode);
+
+        public void AddForce(ForceMode2D forceMode);
 
         /// <summary>
-        /// 力の大きさ
+        /// 計算結果をRigidbody.Velocityに設定します
         /// </summary>
-        public float ForceMagnitude { get; }
+        public void SetVelocity();
 
         /// <summary>
-        /// 力の方向
+        /// キャラクターの滑らかな回転を計算します
         /// </summary>
-        public Vector3 ForceNormal { get; }
+        public void CharacterSmoothlyRotation(ref Quaternion currentRotation, float smoothTime, MotionAxis impactAxis);
 
-        public Quaternion CharacterRotation(Quaternion currentRotation, float smoothing);
+        /// <summary>
+        /// 移動する方向を回転に変換します
+        /// </summary>
+        public Quaternion CharacterRotation(MotionAxis impactAxis);
     }
 }
