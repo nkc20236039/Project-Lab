@@ -9,7 +9,7 @@ namespace Utility.SceneTypeGenerator
 {
     public class SceneTypeGenerator : MonoBehaviour
     {
-        private const string GENERATE_PATH = "/Release/Utility/SceneEnum/";
+        private const string GENERATE_PATH = "/Release/Scripts/Utility/SceneEnum/";
         private const string GENERATE_SCRIPT_NAME = "SceneTypeEnum";
 
         /// <summary> ESceneTypeê∂ê¨ </summary>

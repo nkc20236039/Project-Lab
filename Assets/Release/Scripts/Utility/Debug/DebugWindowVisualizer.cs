@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public abstract class DebugWindowVisualizer : MonoBehaviour
@@ -18,8 +15,6 @@ public abstract class DebugWindowVisualizer : MonoBehaviour
     private int titleSize;
     [SerializeField]
     private bool isForce;
-
-    private bool isHoge = true;
 
     protected virtual void OnGUI()
     {

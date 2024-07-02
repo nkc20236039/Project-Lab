@@ -8,5 +8,7 @@
 		SampleScene,
 		_Template3D,
 		DebugUI,
+		CinemachineExtension,
+		HogeScene,
 	}
 }
